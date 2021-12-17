@@ -1,0 +1,2 @@
+Cuando se cambia el tamaño de la pantalla queda descuadrado
+es necesario hacerlo responsive

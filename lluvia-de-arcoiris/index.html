@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>LLUVIA DE ARCOIRIS</title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            let cantidad = 150; //cantidad de gotas
+            let $body = document.querySelector('body') //referencia al elemento body del html
+            let i = 0, //variable auxiliar para usar en ciclo while
+                $fragment = document.createDocumentFragment(); //fragmento para en el cual se insertaran las 'i'
+
+            while (i < cantidad) {
+                let $gota = document.createElement('i'); //creacion de elemento i
+
+                /* MAth.ramdom()
+                    siempre da como resultado un nuemero entre 0 y 1
+                */
+                let size = Math.random() * 5,
+                    posX = Math.floor(Math.random() * window.innerWidth),
+                    delay = Math.random() * -20,
+                    duracion = Math.random() * 5;
+
+
+                // seteo propiedades del elemento $gota
+                $gota.setAttribute('style', `
+                width:${.2+size}px;
+                 left:${posX}px;
+                  animation-delay: ${delay}s;
+                  animation-duration: ${1+duracion}s`)
+                // $gota.setAttribute('style', `width=${.2+size}px`)
+
+                //agrego dentro del fragmento cada gota creada
+                $fragment.appendChild($gota);
+                i++;
+            }
+            // para no realizar muchas inserciones dentro del DOM realizo una sola que tenga todo
+            $body.appendChild($fragment)
+        })()
+    </script>
+</body>
+
+</html>
