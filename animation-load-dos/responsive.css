@@ -1,0 +1,118 @@
+/* 
+    por el momento...
+
+    para que sea editar el tamaño del loader:
+
+    .loader => aplicar el width y height deseado
+
+    ::before y ::after del .loader => cambiar el ancho del borde
+
+    span::before => en el filter editar el valor de la funcion blur()
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #333333;
+}
+
+.loader {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: #333;
+    border-radius: 50%;
+    
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, .25),
+    10px 10px 70px rgba(0, 0, 0, .25);
+/*  box-shadow: 
+    1er => sombra derecha(+) e izquierda(-)
+    2do => sombra arriba(-) y abajo(+)
+    3ro => difuminacion
+    4to => color de la sombra*/
+
+    border: 1px solid #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.loader::before {
+    content: '';
+    position: absolute;
+    inset: 33%;/* es igual que top | bottom | left | rigth */
+    /* background: #fff; */
+    border-radius: 50%;
+    border: 1px dashed #666;
+    box-shadow: inset -5px -5px 25px rgba(0, 0, 0, .25),
+    inset 5px 5px 35px rgba(0, 0, 0, .25);/* inset pone las sombras por dentro del elemento */
+    z-index: 1;
+
+    animation: animate 20s linear infinite;
+}
+
+.loader::after {
+    content: '';
+    position: absolute;
+    /* inset: 40px;  */
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    border: 1.5px dashed #666;
+    box-shadow: inset -5px -5px 25px rgba(0, 0, 0, .25),
+    inset 5px 5px 35px rgba(0, 0, 0, .25);/* inset pone las sombras por dentro del elemento */
+    background: rgba(0, 0, 0, .15);
+    z-index: 2;
+
+    animation: animate 15s linear infinite;
+}
+
+.loader span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background: transparent;
+    transform-origin: left top;/*establecer el origen a 0% 0% del borde superior izquierdo*/
+    overflow: hidden;
+    animation: animate 2s linear infinite;
+
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.loader span::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transform-origin: top left;
+    transform: rotate(35deg);
+    
+    filter: blur(5px) drop-shadow(50px 50px 50px #f00);
+    /* blur() aplica un desenfoque mientras mayor sea el valor. No acepta porcentajes  */
+
+    opacity: .75;
+}
